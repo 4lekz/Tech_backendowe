@@ -26,13 +26,14 @@ public class TrainingController {
                 .map(trainingMapper::toDto)
                 .toList();
     }
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public List<TrainingDto> findTrainingByUserId(@PathVariable Long userId) {
         return trainingService.getUserTraining(userId)
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
+
     @GetMapping("/completed")
     public List<TrainingDto> getCompletedTraining(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return trainingService.getCompletedTraining(date)
@@ -55,22 +56,22 @@ public class TrainingController {
                 .map(trainingMapper::toDto)
                 .toList();
     }
-
     @PostMapping
-    public ResponseEntity<TrainingDto> createTraining(@RequestBody TrainingDto trainingDto) {
-        Training newTraining = trainingMapper.toEntity(trainingDto);
-        Training savedTraining = trainingService.createTraining(newTraining);
-        return ResponseEntity.status(HttpStatus.CREATED).body(trainingMapper.toDto(savedTraining));
+    @ResponseStatus(HttpStatus.CREATED)
+    public TrainingDto createTraining(@RequestBody TrainingDto trainingDto) {
+        Training training = trainingService.createTraining(trainingDto);
+        return trainingMapper.toDto(training);
     }
 
-//    @PutMapping("/{trainingId}")
-//    public ResponseEntity<TrainingDto> updateTraining(
-//            @PathVariable Long trainingId,
-//            @RequestBody TrainingDto updatedFields) {
-//        Training updatedTraining = trainingService.createTraining(trainingId, updatedFields);
-//        return ResponseEntity.ok(trainingMapper.toDto(updatedTraining));
+
+    @PutMapping("/{trainingId}")
+    @ResponseStatus(HttpStatus.OK)
+    public TrainingDto findTrainingById(@PathVariable Long trainingId, @RequestBody TrainingDto trainingDto) {
+        Training updatedTraining = trainingService.updateTraining(trainingId, trainingDto);
+        return trainingMapper.toDto(updatedTraining);
     }
 
+    }
 
 
 

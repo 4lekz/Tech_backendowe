@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class TrainingDto {
     private Long id;
+    private Long userId;
     private UserDto user;
     private Date startTime;
     private Date endTime;
@@ -20,8 +21,9 @@ public class TrainingDto {
 
     public TrainingDto() {}
 
-    public TrainingDto(Long id, UserDto user, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
+    public TrainingDto(Long id, Long userId, UserDto user, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
         this.id = id;
+        this.userId = userId;
         this.user = user;
         this.startTime = startTime;
         this.endTime = endTime;
