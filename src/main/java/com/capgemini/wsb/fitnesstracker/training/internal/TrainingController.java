@@ -29,13 +29,14 @@ public class TrainingController {
                 .map(trainingMapper::toDto)
                 .toList();
     }
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public List<TrainingDto> findTrainingByUserId(@PathVariable Long userId) {
         return trainingService.getUserTraining(userId)
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
+
     @GetMapping("/completed")
     public List<TrainingDto> getCompletedTraining(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return trainingService.getCompletedTraining(date)
@@ -57,6 +58,19 @@ public class TrainingController {
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
+    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TrainingDto createTraining(@RequestBody TrainingDto trainingDto) {
+        Training training = trainingService.createTraining(trainingDto);
+        return trainingMapper.toDto(training);
+    }
+
+    @PutMapping("/{trainingId}")
+    @ResponseStatus(HttpStatus.OK)
+    public TrainingDto findTrainingById(@PathVariable Long trainingId, @RequestBody TrainingDto trainingDto) {
+        Training updatedTraining = trainingService.updateTraining(trainingId, trainingDto);
+        return trainingMapper.toDto(updatedTraining);
     }
 
 

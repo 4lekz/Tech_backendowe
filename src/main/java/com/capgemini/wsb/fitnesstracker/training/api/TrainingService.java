@@ -14,4 +14,6 @@ public interface TrainingService {
     List<Training> getCompletedTraining(Date endDate);
     List<Training> getTrainingByActivityType(ActivityType activityType);
     List<Training> getFinishedTrainingsAfter(Date afterTime);
+    Training updateTraining(Long trainingId, TrainingDto trainingDto);
+    Training createTraining(TrainingDto trainingDto);
 }
