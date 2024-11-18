@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class TrainingServiceImpl implements TrainingProvider, TrainingService {
+class TrainingServiceImpl implements TrainingProvider, TrainingService {
 
     private final TrainingRepository trainingRepository;
     private final UserService userService;
@@ -29,10 +29,6 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return trainingRepository.findAll();
     }
 
-    @Override
-    public List<Training> createTraining(TrainingDto training) {
-        return List.of();
-    }
 
     @Override
     public List<Training> getUserTraining(Long userId) {
