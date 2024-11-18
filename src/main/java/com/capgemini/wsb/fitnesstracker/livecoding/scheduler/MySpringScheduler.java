@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.support.CronTrigger;
 
 @Component
 public class MySpringScheduler {
@@ -24,11 +25,19 @@ public class MySpringScheduler {
 
     @PostConstruct
     public void startScheduling() {
-        mainScheduler.scheduleAtFixedRate(this::scheduleTask1, 5000);
-        additionalScheduler.scheduleAtFixedRate(this::scheduleTask2, 3000);
-        additionalScheduler.scheduleWithFixedDelay(this::scheduleTask3, 5000);
-    }
+        mainScheduler.schedule(this::scheduleMonthlyTask, new CronTrigger("0 0 0 1 * ?")); //miesiecznie
+        mainScheduler.schedule(this::scheduleMinuteTask, new CronTrigger("0 * * * * ?")); //minutowo
 
+//        mainScheduler.scheduleAtFixedRate(this::scheduleTask1, 5000);
+//        additionalScheduler.scheduleAtFixedRate(this::scheduleTask2, 3000);
+//        additionalScheduler.scheduleWithFixedDelay(this::scheduleTask3, 5000);
+    }
+    public void scheduleMinuteTask() {
+        log.info("Scheduled minute task executed");
+    }
+    public void scheduleMonthlyTask() {
+        log.info("Scheduled monthly task executed");
+    }
     public void scheduleTask1() {
         log.info("Scheduled task 1");
     }
