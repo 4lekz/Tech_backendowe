@@ -1,14 +1,11 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +63,7 @@ public class TrainingController {
         return trainingMapper.toDto(training);
     }
 
+
     @PutMapping("/{trainingId}")
     @ResponseStatus(HttpStatus.OK)
     public TrainingDto findTrainingById(@PathVariable Long trainingId, @RequestBody TrainingDto trainingDto) {
@@ -73,5 +71,7 @@ public class TrainingController {
         return trainingMapper.toDto(updatedTraining);
     }
 
+    }
 
-}
+
+
