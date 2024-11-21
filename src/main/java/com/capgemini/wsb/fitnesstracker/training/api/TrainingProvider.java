@@ -16,4 +16,5 @@ public interface TrainingProvider {
      */
     Optional<User> getTraining(Long trainingId);
     List<Training> getAllTrainings();
+    List<Training> byUserId(Long userId);
 }

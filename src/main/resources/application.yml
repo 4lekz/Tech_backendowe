@@ -1,4 +1,14 @@
 spring:
+  mail:
+    host: aaaa
+    port: 587
+    username: asfa
+    password: fsafsa
+    properties:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
   profiles:
     active: loadInitialData
   datasource:
@@ -10,4 +20,7 @@ spring:
     console:
       enabled: true
 server:
-  port: 8081
+  port: 8083
+mail:
+  from: q12434@wp.pl
+
