@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,24 @@ class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return trainingRepository.findAll();
     }
 
+    @Override
+    public List<Training> getTrainingsFromCurrentMonth() {
+        LocalDate now = LocalDate.now();
+        int currentMonth = now.getMonthValue();
+        int currentYear = now.getYear();
 
+        return trainingRepository.findAll()
+                .stream()
+                .filter(training -> {
+                    LocalDate trainingDate = training.getStartTime()
+                            .toInstant()
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalDate();
+                    return trainingDate.getMonthValue() == currentMonth &&
+                            trainingDate.getYear() == currentYear;
+                })
+                .toList();
+    }
     @Override
     public List<Training> getUserTraining(Long userId) {
         return trainingRepository.findByUser_Id(userId);

@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface TrainingService {
     List<Training> getAllTrainings();
+    List<Training> getTrainingsFromCurrentMonth();
     List<Training> getUserTraining(Long userid);
     List<Training> getCompletedTraining(Date endDate);
     List<Training> getTrainingByActivityType(ActivityType activityType);
