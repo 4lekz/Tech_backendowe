@@ -33,7 +33,10 @@ public class TrainingController {
                 .map(trainingMapper::toDto)
                 .toList();
     }
-
+    @GetMapping("/currentMonth")
+    public List<Training> getTrainingsFromCurrentMonth() {
+        return trainingService.getTrainingsFromCurrentMonth();
+    }
     @GetMapping("/completed")
     public List<TrainingDto> getCompletedTraining(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return trainingService.getCompletedTraining(date)
