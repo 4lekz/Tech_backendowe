@@ -1,9 +1,10 @@
 spring:
   mail:
-    host: aaaa
-    port: 587
-    username: asfa
-    password: fsafsa
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 731efeb1439ca2
+    password: 778fd265a9be24
+    protocol: smtp
     properties:
       smtp:
         auth: true
@@ -20,7 +21,7 @@ spring:
     console:
       enabled: true
 server:
-  port: 8083
+  port: 8081
 mail:
   from: q12434@wp.pl
 
