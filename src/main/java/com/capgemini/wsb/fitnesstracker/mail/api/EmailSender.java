@@ -10,6 +10,6 @@ public interface EmailSender {
      *
      * @param email information on email to be sent
      */
-    public void send(EmailDto email);
+    void send(EmailDto email);
 
 }
